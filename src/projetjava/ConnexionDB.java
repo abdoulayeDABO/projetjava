@@ -17,7 +17,7 @@ public class ConnexionDB {
 			String urlPilote = p.getProperty("jdbc.driver.class");
 			Class.forName(urlPilote);
 //			System.out.println("Le pilote est bien charge");
-			System.out.println("... Chargement");
+			System.out.println("CHARGEMENT ...");
 			String url = p.getProperty("jdbc.url");
 			String user = p.getProperty("jdbc.login");
 			String password = p.getProperty("jdbc.password");
@@ -29,15 +29,6 @@ public class ConnexionDB {
 			return null;
 		}
 		
-//		String urlPilote = "com.mysql.cj.jdbc.Driver";
-//		Class.forName(urlPilote);
-//		System.out.println("Le pilote est bien charge");
-//		String url = "jdbc:mysql://localhost:3306/banque";
-//		String user = "root";
-//		String password = "kaliuser";
-//		Connection con = DriverManager.getConnection(url, user, password);
-//		System.out.println("Connexion etablie");
-//		return con;
 	}
 
 //	public static void main(String args[]) throws Exception {

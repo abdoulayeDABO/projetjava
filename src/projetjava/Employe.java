@@ -7,6 +7,7 @@ public class Employe {
 	private String numTel;
 	private String email;
 	private String mdp;
+//	private String message = "";
 	private double salaire;
 
 	// Constructor
