@@ -6,13 +6,14 @@ public class Employe {
 	private String nom;
 	private String numTel;
 	private String email;
-	private String mdp;
 //	private String message = "";
 	private double salaire;
+    private String mdp;
+    private String fonction;
 
 	// Constructor
 	public Employe(String employeId, String prenom, String nom, String numTel, String email, String mdp,
-			double salaire) {
+			double salaire, String fonction) {
 		this.setPrenom(prenom);
 		this.setNom(nom);
 		this.setEmployeId(employeId);
@@ -31,6 +32,7 @@ public class Employe {
 	public String getEmployeId() {
 		return employeId;
 	}
+	
 
 	public void setEmployeId(String employeId) {
 		this.employeId = employeId;
@@ -83,5 +85,23 @@ public class Employe {
 	public void setSalaire(double salaire) {
 		this.salaire = salaire;
 	}
+
+	public String getAdresse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getFonction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
+	}
+
+	
+
+
 
 }

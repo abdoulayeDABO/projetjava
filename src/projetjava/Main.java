@@ -18,80 +18,112 @@ public class Main {
           choix = scanner.nextInt();
           switch (choix) {
               case 1:
-              	   System.out.print("Login: ");
-              	   String login = scanner.next();
-                     System.out.print("Mot de passe: ");
-                     String password = scanner.next();
-                     is_authenticated = Administrateur.authentifier(login, password);
-                     if(is_authenticated) {
-                  	   System.out.println("Succes: Authentification reussie.");
-                  	   // Afficher l'interface d'administration apres une connexion reussie.                 
-                  	   Utilitaire.afficherAdministrationMenu();
-                     }else {
-                  	   System.out.println("Erreur: Oops! Login ou mot de passe incorect.\n");
-                     }
+            	  System.out.println();
+            	  System.out.println("##########################################################");
+            	  System.out.println("#                  AUTHENTIFICATION                      #");
+            	  System.out.println("##########################################################");
+            	  System.out.println();
+            	  System.out.print("> Entrer le Login: ");
+              	  String login = scanner.next();
+				  System.out.print("> Entrer le Mot de passe: ");
+				  String password = scanner.next();
+				  is_authenticated = Administrateur.authentifier(login, password);
+				  if(is_authenticated) {
+				    System.out.println("Succes: Authentification reussie.");
+				  }else {
+				    System.out.println("Erreur: Oops! Login ou mot de passe incorect.\n");
+				  }
                   break;
               case 2: System.out.println("Merci d'avoir utilisé notre application. Au revoir !"); break;
               default: System.out.println("Choix invalide. Veuillez sélectionner une option valide."); break;
           }
           
       } while (choix != 2 && !is_authenticated ); 
-      scanner.close();
       
       Employe employe = new Employe();
-      
       while (true) {
+     	 // Afficher l'interface d'administration apres une connexion reussie.                 
     	 Utilitaire.afficherAdministrationMenu();
       	choix = scanner.nextInt();
       	scanner.nextLine();
       	  	
-      	if(choix == 1) {
-      		System.out.println("");     		
+      	if(choix == 1) {  
+      		System.out.println();
       		System.out.println("##########################################################");
    	        System.out.println("#                ENREGISTREMENT D'UN EMPLOYE             #");
    	        System.out.println("##########################################################");
-   	        System.out.print(" Prenom: ");
-      	  	String 	prenom = scanner.nextLine();
-      	  	System.out.print(" Nom: ");
-      	    String 	nom = scanner.nextLine();
-      	    System.out.print(" Telephone: ");
-      	    String numTel = scanner.nextLine();
-      	    System.out.print(" Email: ");
-      	    String email = scanner.nextLine();
-      	    //System.out.print(" Adresse: ");
-      	    //String addr = scanner.nextLine();
-      	    System.out.print(" Indentifiant: ");
-      	    String uid = scanner.nextLine();  
-      	    System.out.print(" Salaire: ");
-      	    double salaire = scanner.nextDouble(); 
-      	   
-      	    employe.setPrenom(prenom);
-      	    employe.setNom(nom);
-      		employe.setEmployeId(uid);
-      		employe.setEmail(email);
-      		employe.setNumTel(numTel);
-      		//employe.setAddr(addr);
-      		employe.setSalaire(salaire);
-      	    
+   	        System.out.println();
+   	        employe = Utilitaire.demanderInfosEmploye();
       		Administrateur.ajouterEmploye(employe);
-      		
       	}
-      	if(choix == 2) Administrateur.supprimerEmploye(employe);  
-      	if(choix == 3) Administrateur.editerEmploye(employe);
-      	if(choix == 4) Administrateur.afficherListEmploye();  
-      	if(choix == 5) Administrateur.afficherInfo(employe);
-      	if(choix == 6) Administrateur.imprimerRecuPayement(employe);
       	
+      	if(choix == 2 ) {
+      		System.out.println();
+      		System.out.println("##########################################################");
+   	        System.out.println("#                  EDITION D'UN EMPLOYE                  #");
+   	        System.out.println("##########################################################");
+   	        System.out.println();
+   	        employe = Utilitaire.demanderInfosEmploye();
+   	        Administrateur.editerEmploye(employe);
+      	}
+      	if(choix == 3) {  
+      		System.out.println();
+      		System.out.println("##########################################################");
+   	        System.out.println("#                  SUPPRESSION D'UN EMPLOYE              #");
+   	        System.out.println("##########################################################");
+   	        System.out.println();
+   			System.out.print("Entrez l'identifiant de l'employé à supprimer : ");
+   			String employeId = scanner.nextLine();
+      		Administrateur.supprimerEmploye(employeId);
+      	}
+      	
+   
+      	if(choix == 4) {
+      		System.out.println();
+      		System.out.println("##########################################################");
+   	        System.out.println("#                   LISTES DES EMPLOYES                  #");
+   	        System.out.println("##########################################################");
+   	        System.out.println();
+      		Administrateur.afficherListEmploye();  
+      	}
+      	if(choix == 5) { 
+      		System.out.println();
+      		System.out.println("##########################################################");
+   	        System.out.println("#               INFORMATIONS SUR L'EMPLOYE               #");
+   	        System.out.println("##########################################################");
+   	        System.out.println();
+   	        System.out.print("> Entrer l'Identifiant de l'employe: ");
+	        String employeId = scanner.next();
+      		Administrateur.afficherInfo(employeId);
+      	
+      	}
+      	if(choix == 6) {
+      		System.out.println();
+      		System.out.println("##########################################################");
+   	        System.out.println("#                       RECU DE PAIEMENT                 #");
+   	        System.out.println("##########################################################");
+   	        System.out.println();
+   	        System.out.print("> Entrer l'Identifiant de l'employe: ");
+   	        String employeId = scanner.next();
+      		Administrateur.imprimerRecuPayement(employeId);
+      	}
       	if(choix == 7) {
-      		System.out.println("Merci d'avoir utilisé notre application. Au revoir !");
+      		System.out.println();
+      		System.out.println("##########################################################");
+   	        System.out.println("#                       STATISTIQUE                      #");
+   	        System.out.println("##########################################################");
+   	        System.out.println();
+   	        Administrateur.afficherStatistique();
+      	}
+      	
+      	if(choix == 8) {
+      		System.out.println("\t\t---# Merci d'avoir utilisé notre application. Au revoir ! #---");
       		break;
       	}
-      	
-      		
-      }
+	
+      }    
       
-      
-		
+      scanner.close();
   }
 }
 
