@@ -8,10 +8,12 @@ public class Employe {
 	private String email;
 	private String mdp;
 	private double salaire;
+	private String anneeService;
+	private String poste;
 
 	// Constructor
-	public Employe(String employeId, String prenom, String nom, String numTel, String email, String mdp,
-			double salaire) {
+	public Employe(String employeId, String prenom, String nom, String numTel, String email, String mdp, double salaire,
+			String anneeService, String poste) {
 		this.setPrenom(prenom);
 		this.setNom(nom);
 		this.setEmployeId(employeId);
@@ -19,6 +21,8 @@ public class Employe {
 		this.setEmail(email);
 		this.setNumTel(numTel);
 		this.setMdp(mdp);
+		this.setAnneeService(anneeService);
+		this.setPoste(poste);
 	}
 
 	public Employe() {
@@ -81,6 +85,22 @@ public class Employe {
 
 	public void setSalaire(double salaire) {
 		this.salaire = salaire;
+	}
+
+	public String getAnneeService() {
+		return anneeService;
+	}
+
+	public void setAnneeService(String anneeService) {
+		this.anneeService = anneeService;
+	}
+
+	public String getPoste() {
+		return poste;
+	}
+
+	public void setPoste(String poste) {
+		this.poste = poste;
 	}
 
 }
