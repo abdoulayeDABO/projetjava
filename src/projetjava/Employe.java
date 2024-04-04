@@ -5,20 +5,22 @@ public class Employe {
 	private String prenom;
 	private String nom;
 	private String numTel;
-	private String email;
+	// private String email;
+	private String login;
 	private String mdp;
 	private double salaire;
 	private String anneeService;
 	private String poste;
 
 	// Constructor
-	public Employe(String employeId, String prenom, String nom, String numTel, String email, String mdp, double salaire,
+	public Employe(String employeId, String nom, String prenom, String login, String mdp, String numTel, double salaire,
 			String anneeService, String poste) {
 		this.setPrenom(prenom);
 		this.setNom(nom);
 		this.setEmployeId(employeId);
 		this.setSalaire(salaire);
-		this.setEmail(email);
+		this.setLogin(login);
+		// this.setEmail(email);
 		this.setNumTel(numTel);
 		this.setMdp(mdp);
 		this.setAnneeService(anneeService);
@@ -62,14 +64,11 @@ public class Employe {
 	public void setNumTel(String numTel) {
 		this.numTel = numTel;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	/*
+	 * public String getEmail() { return email; }
+	 * 
+	 * public void setEmail(String email) { this.email = email; }
+	 */
 
 	public String getMdp() {
 		return mdp;
@@ -101,6 +100,14 @@ public class Employe {
 
 	public void setPoste(String poste) {
 		this.poste = poste;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 }
