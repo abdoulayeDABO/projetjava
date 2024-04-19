@@ -10,7 +10,7 @@ public class Fonctionnalite {
 
 	// Pas besoin de classe puisqu'onn manipule une base de données. De simples
 
-	public static void CreerEmploye(Employe E, Statement s) throws SQLException {
+	public static void CreerEmploye(Statement s) throws SQLException {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("> Donner l'identifiant de l'employé");
 		String id = scan.next();
@@ -55,12 +55,6 @@ public class Fonctionnalite {
 
 		if (re != 0) {
 			System.out.println("> Insertion réussie");
-			/*
-			 * int result = s.
-			 * executeUpdate("INSERT INTO historique(id_employe,poste,operation,date) values('"
-			 * + E.getEmployeId() + "','" + E.getPoste() + "','Creation_employe','" +
-			 * LocalDate.now() + "')");
-			 */
 		} else {
 			System.out.println("> Opération échouée");
 		}
@@ -68,26 +62,13 @@ public class Fonctionnalite {
 	}
 
 	// AFFICHAGE DES EMPLOYES PAR l'ADMIN
-	public static void printEmployes(Employe E, Statement s) throws SQLException {
+	public static void printEmployes(Statement s) throws SQLException {
 		ResultSet result = s.executeQuery("select * from employes");
-		/*
-		 * System.out.println(">Identifiant" + "\t" + "Nom " + "\t" + "Prénom   " + "\t"
-		 * + "Login" + "\tMot de passe" + "\t" + "Telephone" + "\tSalaire" + "\t" +
-		 * "AnnéeIntégration" + "\t" + "Poste");
-		 */
-		/*
-		 * while (result.next()) { System.out.println(result.getString(1) + "\t\t" +
-		 * result.getString(2) + "\t" + result.getString(3) + "\t" + result.getString(4)
-		 * + "\t" + "\t*****\t" + result.getString(6) + "\t" + result.getString(7) +
-		 * "\t\t" + result.getDouble(8) + "\t" + result.getString(9));
-		 * 
-		 * }
-		 */
-		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n ", "Identifiant", "Nom ", "Prénom",
+		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n", "Identifiant", "Nom ", "Prénom",
 				"Login", "Mot de passe", "Telephone", "Salaire", "AnnéeIntégration", "Poste");
 		while (result.next()) {
 			System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18.2f %-20s %-20s%n", result.getString(1),
-					result.getString(2), result.getString(3), result.getString(4), "****", result.getString(6),
+					result.getString(2), result.getString(3), result.getString(4), "*****", result.getString(6),
 					result.getDouble(7), result.getString(8), result.getString(9));
 
 		}
@@ -95,13 +76,11 @@ public class Fonctionnalite {
 	}
 
 	// AFFICHAGE DES INFORMATIONS D'UN EMPLOYE
-	public static void printEmploye(Employe E, Statement s) throws SQLException {
+	public static void printEmploye(Statement s) throws SQLException {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Donner le nom de l'employe");
-		String nom = scan.next();
-		System.out.println("Donner le prenom de l'employe");
-		String prenom = scan.next();
-		ResultSet result = s.executeQuery("select * from employes where nom='" + nom + "' AND prenom='" + prenom + "'");
+		System.out.println("Donner le login de l'employe");
+		String login = scan.next();
+		ResultSet result = s.executeQuery("select * from employes where login='" + login + "'");
 		if (result.next()) {
 			System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n ", "Identifiant", "Nom ",
 					"Prénom", "Login", "Mot de passe", "Telephone", "Salaire", "AnnéeIntégration", "Poste");
@@ -111,14 +90,13 @@ public class Fonctionnalite {
 					result.getDouble(7), result.getString(8), result.getString(9));
 
 		} else {
-			System.out.print("Employe non enregistré");
+			System.out.print("Aucun employé correspondant au login saisi");
 		}
 
 	}
 
 	// RECUPERATION DES INFORMATIONS D'UN EMPLOYE
 	public static void getInformation(Employe E, Statement s) throws SQLException {
-
 		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n ", "Identifiant", "Nom ", "Prénom",
 				"Login", "Mot de passe", "Telephone", "Salaire", "AnnéeIntégration", "Poste");
 		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18.2f %-20s %-20s%n", E.getEmployeId(), E.getNom(),
@@ -139,7 +117,6 @@ public class Fonctionnalite {
 
 	// REINITIALISATION DU MOT DE PASSE
 	public static void setPassword(Employe E, Statement s) throws SQLException {
-
 		Scanner scan = new Scanner(System.in);
 		String mdp;
 		int i = 0;
@@ -168,39 +145,27 @@ public class Fonctionnalite {
 			} while (!(newMdp.equals(confirmMdp)));
 			int re = s.executeUpdate("update employes set mdp='" + newMdp + "' where id='" + E.getEmployeId() + "'");
 			if (re != 0) {
-				System.out.println("> Mot de passe mis à jour");
+				System.out.println(">Mot de passe mis à jour");
 				E.setMdp(confirmMdp);
-				/*
-				 * int result = s.executeUpdate(
-				 * "INSERT INTO historique(id_employe,poste,operation,date) values('" +
-				 * E.getEmployeId() + "','" + E.getPoste() + "','Modif. mot de passe','" +
-				 * LocalDate.now() + "')");
-				 */
 			} else {
-				System.out.println("> Opération échouée");
+				System.out.println(">Opération échouée");
 			}
 		} else {
-			System.out.println("Dépassement du nombre de tentatives. Réessayez plus tard");
+			System.out.println(">Dépassement du nombre de tentatives. Réessayez plus tard");
 		}
 	}
 
 	// SUPPRESSION DE COMPTE PAR L'ADMIN
-	public static void supprimerCompte(Employe E, Statement s) throws SQLException {
+	public static void supprimerCompte(Statement s) throws SQLException {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("> Saisir l'identifiant de l'employé");
-		String id = scan.next();
+		System.out.println(">Saisir le login de l'employé");
+		String login = scan.next();
 		System.out.println("> Confirmez vous la suppression?\n'oui' pour confirmer");
 		String reponse = scan.next();
 		if (reponse.equals("oui")) {
-			int result = s.executeUpdate("delete from employes where id='" + id + "'");
+			int result = s.executeUpdate("delete from employes where login='" + login + "'");
 			if (result != 0) {
 				System.out.println("Suppression effectuée");
-				/*
-				 * int re = s.executeUpdate(
-				 * "INSERT INTO historique(id_employe,poste,operation,date) values('" +
-				 * E.getEmployeId() + "','" + E.getPoste() + "','Supp. compte Admin','" +
-				 * LocalDate.now() + "')");
-				 */
 			} else {
 				System.out.println("Opération échouée");
 			}
@@ -213,12 +178,25 @@ public class Fonctionnalite {
 	// SUPPRESSION DE COMPTE PAR L'EMPLOYE
 	public static boolean supprimerMonCompte(Employe E, Statement s) throws SQLException {
 		Scanner scan = new Scanner(System.in);
+		String mdp;
+		int cpt = 0;
+		do {
+			cpt++;
+			System.out.println("Saissisez votre mot de passe");
+			mdp = scan.next();
+			if (cpt == 3) {
+
+				return false;
+			}
+		} while (!mdp.equals(E.getMdp()));
+
 		System.out.println("Confirmez vous vouloir supprimer votre compte? 'oui' pour confirmer");
 		String reponse = scan.next();
 		if (reponse.equals("oui")) {
 			int result = s.executeUpdate("delete from employes where id='" + E.getEmployeId() + "'");
 			if (result != 0) {
 				System.out.println("Suppression effectuée");
+
 				return true;
 			} else {
 				System.out.println("Opération échouée");
@@ -226,12 +204,13 @@ public class Fonctionnalite {
 		} else {
 			System.out.println("Suppression annulée");
 		}
+
 		return false;// Suppression non effectuée ou annullée
 
 	}
 
 	// CALCUL DU SALAIRE MOYEN
-	public static void getAverageSalary(Employe E, Statement s) throws SQLException {
+	public static void getAverageSalary(Statement s) throws SQLException {
 		ResultSet result = s.executeQuery("select salaire from employes");
 		int nbOfEmployees = 0;
 		double salary = 0;
@@ -250,8 +229,7 @@ public class Fonctionnalite {
 	}
 
 	// FONCTIONNALITE RELATIF AUX ARTICLES
-
-	public static void InsererNouvelArticle(Employe E, Statement s) throws SQLException {
+	public static void InsererNouvelArticle(Statement s) throws SQLException {
 		Scanner scan = new Scanner(System.in);
 		String libelle, categorie;
 		float pu;
@@ -274,15 +252,13 @@ public class Fonctionnalite {
 		int re = s.executeUpdate(query);
 		if (re != 0) {
 			System.out.println("Insertion réussie");
-			int result = s.executeUpdate("INSERT INTO historique(id_employe,poste,operation,date) values('"
-					+ E.getEmployeId() + "','" + E.getPoste() + "','Achat nouvel article','" + LocalDate.now() + "')");
 		} else {
 			System.out.println("Opération échouée");
 		}
 	}
 
-	public static void faireApprovisionnement(Employe E, Statement s) throws SQLException {
-		afficherTousArticles(E, s);
+	public static void faireApprovisionnement(Statement s) throws SQLException {
+		afficherTousArticles(s);
 		Scanner scan = new Scanner(System.in);
 		String libelle, categorie;
 		System.out.println("Rentrez les bonnes informations à partir de la liste d'articles affichée ci-dessus");
@@ -310,17 +286,14 @@ public class Fonctionnalite {
 		int result = s.executeUpdate(query2);
 		if (result != 0) {
 			System.out.println("Opération Effectuée");
-			int request = s
-					.executeUpdate("INSERT INTO historique(id_employe,poste,operation,date) values('" + E.getEmployeId()
-							+ "','" + E.getPoste() + "','Approvionnement article','" + LocalDate.now() + "')");
 		} else {
 			System.out.println("Opération non effectuée");
 		}
 
 	}
 
-	public static void vendreArticle(Employe E, Statement s) throws SQLException {
-		afficherTousArticles(E, s);
+	public static void vendreArticle(Statement s) throws SQLException {
+		afficherTousArticles(s);
 		Scanner scan = new Scanner(System.in);
 		String libelle, categorie;
 		System.out.println("Donnez la catégorie de l'article souhaité");
@@ -340,6 +313,7 @@ public class Fonctionnalite {
 			float pu = re.getFloat(2);
 			if (stock < quantiteVente) {
 				System.out.println("Quantite insuffisante en stock");
+				scan.close();
 				return;
 			}
 			stock -= quantiteVente;
@@ -351,7 +325,7 @@ public class Fonctionnalite {
 					+ categorie + "'";
 			int result = s.executeUpdate(query2);
 			System.out.println("--------------------------------------");
-			System.out.println("|               FACTURE               |");
+			System.out.println("|               FACTURE              |");
 			System.out.println("--------------------------------------");
 			System.out.println("Nom: " + nom);
 			System.out.println("Prenom: " + prenom);
@@ -359,8 +333,6 @@ public class Fonctionnalite {
 			System.out.println("Prix unitaire: " + pu);
 			System.out.println("Quantite: " + quantiteVente);
 			System.out.println("Total: " + pu * quantiteVente);
-			int request = s.executeUpdate("INSERT INTO historique(id_employe,poste,operation,date) values('"
-					+ E.getEmployeId() + "','" + E.getPoste() + "','Vente article','" + LocalDate.now() + "')");
 
 		} else {
 			System.out.println("Opération échouée.\nL'Article n'est peut être pas répertorié");
@@ -368,7 +340,7 @@ public class Fonctionnalite {
 
 	}
 
-	public static void supprimerArticle(Employe E, Statement s) throws SQLException {
+	public static void supprimerArticle(Statement s) throws SQLException {
 		Scanner scan = new Scanner(System.in);
 		String libelle, categorie;
 		System.out.println("Donnez la catégorie de l'article");
@@ -382,9 +354,6 @@ public class Fonctionnalite {
 			int re = s.executeUpdate(query);
 			if (re != 0) {
 				System.out.println("Suppression effectuée");
-				int result = s.executeUpdate(
-						"INSERT INTO historique(id_employe,poste,operation,date) values('" + E.getEmployeId() + "','"
-								+ E.getPoste() + "','Suppression Article','" + LocalDate.now() + "')");
 
 			} else {
 				System.out.println("Opération annulée\nL'article n'existe peut être pas!");
@@ -393,10 +362,9 @@ public class Fonctionnalite {
 		} else {
 			System.out.println("Suppression annulée");
 		}
-
 	}
 
-	public static void afficherTousArticles(Employe E, Statement s) throws SQLException {
+	public static void afficherTousArticles(Statement s) throws SQLException {
 		ResultSet re = s.executeQuery("SELECT * FROM Articles");
 		boolean bool = false;
 		System.out.printf("%-20s %-20s %-19s %-20s%n", "Libellé", "Prix Unitaire", "Quantite", "Catégorie");

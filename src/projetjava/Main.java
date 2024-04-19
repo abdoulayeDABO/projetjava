@@ -51,35 +51,35 @@ public class Main {
 							option = sc.nextInt();
 							switch (option) {
 							case 1:
-								Fonctionnalite.CreerEmploye(E, s);
+								Fonctionnalite.CreerEmploye(s);
 								break;
 							case 2:
-								Fonctionnalite.supprimerCompte(E, s);
+								Fonctionnalite.supprimerCompte(s);
 								break;
 
 							case 3:
-								Fonctionnalite.printEmployes(E, s);
+								Fonctionnalite.printEmployes(s);
 								break;
 							case 4:
-								Fonctionnalite.printEmploye(E, s);
+								Fonctionnalite.printEmploye(s);
 								break;
 							case 5:
-								Fonctionnalite.getAverageSalary(E, s);
+								Fonctionnalite.getAverageSalary(s);
 								break;
 							case 6:
-								Fonctionnalite.InsererNouvelArticle(E, s);
+								Fonctionnalite.InsererNouvelArticle(s);
 								break;
 							case 7:
-								Fonctionnalite.supprimerArticle(E, s);
+								Fonctionnalite.supprimerArticle(s);
 								break;
 							case 8:
-								Fonctionnalite.afficherTousArticles(E, s);
+								Fonctionnalite.afficherTousArticles(s);
 								break;
 							case 9:
-								Fonctionnalite.faireApprovisionnement(E, s);
+								Fonctionnalite.faireApprovisionnement(s);
 								break;
 							case 10:
-								Fonctionnalite.vendreArticle(E, s);
+								Fonctionnalite.vendreArticle(s);
 								break;
 							case 0:
 								System.out.println("Bye...");
