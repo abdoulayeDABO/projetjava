@@ -41,23 +41,26 @@ public class Fonctionnalite {
 		String serviceDate;
 		System.out.println("> Donner l'année d'entrée dans le service");
 		serviceDate = scan.next();
+		scan.nextLine();
+		System.out.println("> Donnez la fonction occupée par l'employé");
+		String poste = scan.nextLine();
 		double salary;
 		do {
 			System.out.println("> Saisir le salaire de lemployé");
 			salary = scan.nextDouble();
 		} while (salary <= 0);
-		scan.nextLine();
-		System.out.println("> Donnez la fonction occupée par l'employé");
-		String poste = scan.nextLine();
-		;
 		int re = s.executeUpdate("insert into employes(id,nom,prenom,login,mdp,tel,salaire,annee,poste) values('" + id
 				+ "','" + name + "','" + firstname + "','" + login + "','" + mdp + "','" + tel + "'," + salary + ",'"
 				+ serviceDate + "','" + poste + "')");
 
 		if (re != 0) {
 			System.out.println("> Insertion réussie");
-			int result = s.executeUpdate("INSERT INTO historique(id_employe,poste,operation,date) values('"
-					+ E.getEmployeId() + "','" + E.getPoste() + "','Creation_employe','" + LocalDate.now() + "')");
+			/*
+			 * int result = s.
+			 * executeUpdate("INSERT INTO historique(id_employe,poste,operation,date) values('"
+			 * + E.getEmployeId() + "','" + E.getPoste() + "','Creation_employe','" +
+			 * LocalDate.now() + "')");
+			 */
 		} else {
 			System.out.println("> Opération échouée");
 		}
@@ -67,13 +70,48 @@ public class Fonctionnalite {
 	// AFFICHAGE DES EMPLOYES PAR l'ADMIN
 	public static void printEmployes(Employe E, Statement s) throws SQLException {
 		ResultSet result = s.executeQuery("select * from employes");
-		System.out.println("> Identifiant" + "\t" + "Nom " + "\t" + "Prénom   " + "\t" + "Login" + "\tMot de passe"
-				+ "\t" + "Telephone" + "\tSalaire" + "\t" + "AnnéeIntégrationService" + "\t" + "Poste");
+		/*
+		 * System.out.println(">Identifiant" + "\t" + "Nom " + "\t" + "Prénom   " + "\t"
+		 * + "Login" + "\tMot de passe" + "\t" + "Telephone" + "\tSalaire" + "\t" +
+		 * "AnnéeIntégration" + "\t" + "Poste");
+		 */
+		/*
+		 * while (result.next()) { System.out.println(result.getString(1) + "\t\t" +
+		 * result.getString(2) + "\t" + result.getString(3) + "\t" + result.getString(4)
+		 * + "\t" + "\t*****\t" + result.getString(6) + "\t" + result.getString(7) +
+		 * "\t\t" + result.getDouble(8) + "\t" + result.getString(9));
+		 * 
+		 * }
+		 */
+		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n ", "Identifiant", "Nom ", "Prénom",
+				"Login", "Mot de passe", "Telephone", "Salaire", "AnnéeIntégration", "Poste");
 		while (result.next()) {
-			System.out.println(result.getString(1) + "\t\t" + result.getString(2) + "\t" + result.getString(3) + "\t"
-					+ result.getString(4) + "\t" + "\t*****\t" + result.getString(6) + "\t" + result.getString(7)
-					+ "\t\t" + result.getDouble(8) + "\t" + result.getString(9));
+			System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18.2f %-20s %-20s%n", result.getString(1),
+					result.getString(2), result.getString(3), result.getString(4), "****", result.getString(6),
+					result.getDouble(7), result.getString(8), result.getString(9));
 
+		}
+
+	}
+
+	// AFFICHAGE DES INFORMATIONS D'UN EMPLOYE
+	public static void printEmploye(Employe E, Statement s) throws SQLException {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Donner le nom de l'employe");
+		String nom = scan.next();
+		System.out.println("Donner le prenom de l'employe");
+		String prenom = scan.next();
+		ResultSet result = s.executeQuery("select * from employes where nom='" + nom + "' AND prenom='" + prenom + "'");
+		if (result.next()) {
+			System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n ", "Identifiant", "Nom ",
+					"Prénom", "Login", "Mot de passe", "Telephone", "Salaire", "AnnéeIntégration", "Poste");
+
+			System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18.2f %-20s %-20s%n", result.getString(1),
+					result.getString(2), result.getString(3), result.getString(4), "****", result.getString(6),
+					result.getDouble(7), result.getString(8), result.getString(9));
+
+		} else {
+			System.out.print("Employe non enregistré");
 		}
 
 	}
@@ -81,11 +119,22 @@ public class Fonctionnalite {
 	// RECUPERATION DES INFORMATIONS D'UN EMPLOYE
 	public static void getInformation(Employe E, Statement s) throws SQLException {
 
-		System.out.println("> Identifiant" + "\t" + "Nom " + "\t" + "Prénom   " + "\t" + "Login" + "\tMot de passe"
-				+ "\t" + "Telephone" + "\tSalaire" + "\t" + "AnnéeIntégrationService" + "\t" + "Poste");
-		System.out.println(
-				E.getEmployeId() + "\t\t" + E.getNom() + "\t" + E.getPrenom() + "\t" + E.getLogin() + "\t" + "\t*****\t"
-						+ E.getNumTel() + "\t" + E.getSalaire() + "\t\t" + E.getAnneeService() + "\t" + E.getPoste());
+		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18s %-20s %-19s%n ", "Identifiant", "Nom ", "Prénom",
+				"Login", "Mot de passe", "Telephone", "Salaire", "AnnéeIntégration", "Poste");
+		System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-18.2f %-20s %-20s%n", E.getEmployeId(), E.getNom(),
+				E.getPrenom(), E.getLogin(), "*******", E.getNumTel(), E.getSalaire(), E.getAnneeService(),
+				E.getPoste());
+	}
+
+	// AFFICHER FICHE DE PAIE
+	public static void afficherFiche(Employe E, Statement s) {
+		System.out.println("--------------------------------------");
+		System.out.println("|            FICHE DE PAIE            |");
+		System.out.println("--------------------------------------");
+		System.out.println("Nom: " + E.getNom());
+		System.out.println("Prenom: " + E.getPrenom());
+		System.out.println("Montant du salaire: " + E.getSalaire());
+		System.out.println("Date:" + LocalDate.now());
 	}
 
 	// REINITIALISATION DU MOT DE PASSE
@@ -146,9 +195,12 @@ public class Fonctionnalite {
 			int result = s.executeUpdate("delete from employes where id='" + id + "'");
 			if (result != 0) {
 				System.out.println("Suppression effectuée");
-				int re = s.executeUpdate(
-						"INSERT INTO historique(id_employe,poste,operation,date) values('" + E.getEmployeId() + "','"
-								+ E.getPoste() + "','Supp. compte Admin','" + LocalDate.now() + "')");
+				/*
+				 * int re = s.executeUpdate(
+				 * "INSERT INTO historique(id_employe,poste,operation,date) values('" +
+				 * E.getEmployeId() + "','" + E.getPoste() + "','Supp. compte Admin','" +
+				 * LocalDate.now() + "')");
+				 */
 			} else {
 				System.out.println("Opération échouée");
 			}
@@ -246,7 +298,11 @@ public class Fonctionnalite {
 		String query1 = "SELECT quantite FROM Articles WHERE libelle='" + libelle + "' AND categorie='" + categorie
 				+ "'";
 		ResultSet re = s.executeQuery(query1);
-		re.next();
+		if (!re.next()) {
+			System.out.print("L'article n'est pas enregistré...\nVeuillez procéder à l'enregistrement au préalable\n");
+			return;
+		}
+
 		int quantite = re.getInt(1);
 		quantite += quantiteAchat;
 		String query2 = "UPDATE Articles SET quantite=" + quantite + " WHERE libelle='" + libelle + "' AND categorie='"
@@ -281,7 +337,7 @@ public class Fonctionnalite {
 		ResultSet re = s.executeQuery(query1);
 		if (re.next()) {
 			int stock = re.getInt(1);
-			int pu = re.getInt(2);
+			float pu = re.getFloat(2);
 			if (stock < quantiteVente) {
 				System.out.println("Quantite insuffisante en stock");
 				return;
@@ -343,10 +399,10 @@ public class Fonctionnalite {
 	public static void afficherTousArticles(Employe E, Statement s) throws SQLException {
 		ResultSet re = s.executeQuery("SELECT * FROM Articles");
 		boolean bool = false;
-		System.out.println("Libellé" + "\t\t" + "Prix Unitaire" + "\t\t" + "Quantite" + "\t\t" + "Catégorie");
+		System.out.printf("%-20s %-20s %-19s %-20s%n", "Libellé", "Prix Unitaire", "Quantite", "Catégorie");
 		while (re.next()) {
-			System.out.println(
-					re.getString(1) + "\t\t" + re.getInt(2) + "\t\t" + re.getInt(3) + "\t\t" + re.getString(4));
+			System.out.printf("%-21s %-17.3f %-20d %-20s%n", re.getString(1), re.getFloat(2), re.getInt(3),
+					re.getString(4));
 			bool = true;
 		}
 		if (!bool) {

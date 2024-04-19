@@ -61,7 +61,7 @@ public class Main {
 								Fonctionnalite.printEmployes(E, s);
 								break;
 							case 4:
-								// Fonctionnalite.printEmploye(E, s); Fonction à créer
+								Fonctionnalite.printEmploye(E, s);
 								break;
 							case 5:
 								Fonctionnalite.getAverageSalary(E, s);
@@ -98,14 +98,13 @@ public class Main {
 								Fonctionnalite.getInformation(E, s);
 								break;
 							case 2:
-								// Fonctionnalite.AfficherFiche(E,s); Fonction à créer
+								Fonctionnalite.afficherFiche(E, s);
 								break;
 							case 3:
 								boolean bool2 = Fonctionnalite.supprimerMonCompte(E, s);
 								if (bool2) {
 									System.out.println(
-											"Vous avez été déconnecté car n'ayant plus de compte.\nVeuillez voir l'adminis"
-													+ "trateur en cas s'il si vous pensez ne pas être à l'origine de cet inconvenient");
+											"Vous avez été déconnecté car n'ayant plus de compte.\nVeuillez voir l'administrateur si vous pensez ne pas être à l'origine de cet inconvenient");
 									return;
 								}
 
@@ -115,6 +114,7 @@ public class Main {
 								break;
 							case 0:
 								System.out.println("Bye...");
+								break;
 							default:
 								System.out.println("Choix invalide\n");
 							}
