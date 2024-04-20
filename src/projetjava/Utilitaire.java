@@ -15,6 +15,10 @@ public class Utilitaire {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy 'à' HH:mm");
 		Date date = new Date();
 		System.out.println("#Aujourd'hui : " + formatter.format(date));
+<<<<<<< HEAD
+=======
+		// System.out.println();
+>>>>>>> origin/Samuel
 
 		System.out.println("##########################################################");
 		System.out.println("#                INTERFACE DE CONNEXION                  #");
@@ -23,7 +27,11 @@ public class Utilitaire {
 		System.out.println(" (1) Se connecter");
 		System.out.println(" (2) Quitter");
 		System.out.println();
+<<<<<<< HEAD
 		System.out.print("Veuillez choisir une option : ");
+=======
+		System.out.print("> Veuillez choisir une option : ");
+>>>>>>> origin/Samuel
 
 	}
 
@@ -55,26 +63,48 @@ public class Utilitaire {
 		System.out.println();
 		System.out.println();
 		// Options
+<<<<<<< HEAD
 		System.out.println("==========================================================");
 		System.out.println("                     GESTION DES EMPLOYES                 ");
 		System.out.println("==========================================================");
 		System.out.println(" (1) Ajouter un nouveau compte employé");
+=======
+		System.out.println("----------------------------------------------------------");
+		System.out.println("|                    GESTION DES EMPLOYES                |");
+		System.out.println("----------------------------------------------------------");
+		System.out.println(" (1) Ajouter un nouveau compte employé");
+		// System.out.println(" (2) Editer un employé");
+>>>>>>> origin/Samuel
 		System.out.println(" (2) Supprimer un compte employé");
 		System.out.println(" (3) Afficher la liste des employés et leurs informations");
 		System.out.println(" (4) Afficher les informations d'un employe");
 		System.out.println(" (5) Afficher le salaire moyen des employés");
 		System.out.println();
+<<<<<<< HEAD
 		System.out.println("==========================================================");
 		System.out.println("                     GESTION DES ARTICLES                 ");
 		System.out.println("==========================================================");
+=======
+		System.out.println("----------------------------------------------------------");
+		System.out.println("|                    GESTION DES ARTICLES                |");
+		System.out.println("----------------------------------------------------------");
+>>>>>>> origin/Samuel
 		System.out.println(" (6)  Ajouter un nouvel article");
 		System.out.println(" (7)  Supprimer un article");
 		System.out.println(" (8)  Afficher tous les articles");
 		System.out.println(" (9)  Faire l'approvionnement d'un article");
 		System.out.println(" (10) Procéder à la vente d'un article");
+<<<<<<< HEAD
 		System.out.println(" (0) Quitter");
 		System.out.println();
 		System.out.print("Veuillez choisir une option : ");
+=======
+		// System.out.println(" (5) Imprimer le reçu de paiement d'un employé");
+		// System.out.println(" (6) Afficher des statistiques de l'entreprise");
+		System.out.println(" (0) Quitter");
+		System.out.println();
+		System.out.print("> Veuillez choisir une option : ");
+>>>>>>> origin/Samuel
 
 	}
 
@@ -94,12 +124,21 @@ public class Utilitaire {
 		System.out.println(" (4) Réinitialiser mon mot de passe");
 		System.out.println(" (0) Quitter");
 		System.out.println();
+<<<<<<< HEAD
 		System.out.print("Veuillez choisir une option : ");
+=======
+		System.out.print("> Veuillez choisir une option : ");
+>>>>>>> origin/Samuel
 
 	}
 
 	public static void initialiserEmploye(ResultSet result, Employe E) throws SQLException {
+<<<<<<< HEAD
 	
+=======
+		// result.next();
+		// System.out.println("id=" + result.getString(1));
+>>>>>>> origin/Samuel
 		String id = result.getString(1);
 		String nom = result.getString(2);
 		String prenom = result.getString(3);
@@ -118,6 +157,11 @@ public class Utilitaire {
 		E.setSalaire(salaire);
 		E.setAnneeService(annee);
 		E.setPoste(poste);
+<<<<<<< HEAD
 		
+=======
+		// E = new Employe(id, nom, prenom, login, mdp1, tel, salaire, annee, poste);
+		// System.out.println(E.getAnneeService() + " " + E.getEmployeId());
+>>>>>>> origin/Samuel
 	}
 }

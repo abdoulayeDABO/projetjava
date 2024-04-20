@@ -26,9 +26,15 @@ public class Main {
 				boolean bool = true;
 				do {
 					i++;
+<<<<<<< HEAD
 					System.out.print("Saisir votre Login: ");
 					login = sc.next();
 					System.out.print("Saisir votre mot de passe: ");
+=======
+					System.out.println("Saisir votre Login");
+					login = sc.next();
+					System.out.println("Saisir votre mot de passe");
+>>>>>>> origin/Samuel
 					mdp = sc.next();
 					bool = Utilitaire.estAuthentifie(login, mdp, s);
 					if (!bool) {
@@ -104,7 +110,11 @@ public class Main {
 								boolean bool2 = Fonctionnalite.supprimerMonCompte(E, s);
 								if (bool2) {
 									System.out.println(
+<<<<<<< HEAD
 											"# Vous avez été déconnecté car n'ayant plus de compte. Veuillez voir l'administrateur si vous pensez ne pas être à l'origine de cet inconvenient #");
+=======
+											"Vous avez été déconnecté car n'ayant plus de compte.\nVeuillez voir l'administrateur si vous pensez ne pas être à l'origine de cet inconvenient");
+>>>>>>> origin/Samuel
 									return;
 								}
 
@@ -116,14 +126,22 @@ public class Main {
 								System.out.println("Bye...");
 								break;
 							default:
+<<<<<<< HEAD
 								System.out.println("# Choix invalide #");
+=======
+								System.out.println("Choix invalide\n");
+>>>>>>> origin/Samuel
 							}
 						} while (option != 0);
 					}
 				}
 				// Cas de dépassement du nombre d'essai
 				else {
+<<<<<<< HEAD
 					System.out.println("# Vous avez dépassé le nombre d'essai autorisé! Réessayez plus tard. #");
+=======
+					System.out.println("Vous avez dépassé le nombre d'essai autorisé...\n" + "Réessayez plus tard");
+>>>>>>> origin/Samuel
 					return;
 				}
 			} else if (choice == 2) {
