@@ -14,7 +14,13 @@ public class ConnexionDB {
 			}
 			String urlPilote = p.getProperty("jdbc.driver.class");
 			Class.forName(urlPilote);
+<<<<<<< HEAD
 			String urlDB = p.getProperty("jdbc.url");
+=======
+//			System.out.println("Le pilote est bien charge");
+			System.out.println("CHARGEMENT ...");
+			String url = p.getProperty("jdbc.url");
+>>>>>>> 7702d09c08c37da27c3f69f7c8dc4c3349e996fc
 			String user = p.getProperty("jdbc.login");
 			String password = p.getProperty("jdbc.password");
 			Connection con = DriverManager.getConnection(urlDB, user, password);
@@ -24,5 +30,9 @@ public class ConnexionDB {
 			e.printStackTrace();
 			return null;
 		}
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 7702d09c08c37da27c3f69f7c8dc4c3349e996fc
 	}
 }

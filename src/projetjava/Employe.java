@@ -5,6 +5,7 @@ public class Employe {
 	private String prenom;
 	private String nom;
 	private String numTel;
+<<<<<<< HEAD
 	// private String email;
 	private String login;
 	private String mdp;
@@ -15,6 +16,17 @@ public class Employe {
 	// Constructor
 	public Employe(String employeId, String nom, String prenom, String login, String mdp, String numTel, double salaire,
 			String anneeService, String poste) {
+=======
+	private String email;
+//	private String message = "";
+	private double salaire;
+    private String mdp;
+    private String fonction;
+
+	// Constructor
+	public Employe(String employeId, String prenom, String nom, String numTel, String email, String mdp,
+			double salaire, String fonction) {
+>>>>>>> 7702d09c08c37da27c3f69f7c8dc4c3349e996fc
 		this.setPrenom(prenom);
 		this.setNom(nom);
 		this.setEmployeId(employeId);
@@ -36,6 +48,7 @@ public class Employe {
 	public String getEmployeId() {
 		return employeId;
 	}
+	
 
 	public void setEmployeId(String employeId) {
 		this.employeId = employeId;
@@ -86,6 +99,7 @@ public class Employe {
 		this.salaire = salaire;
 	}
 
+<<<<<<< HEAD
 	public String getAnneeService() {
 		return anneeService;
 	}
@@ -111,3 +125,24 @@ public class Employe {
 	}
 
 }
+=======
+	public String getAdresse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getFonction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setFonction(String fonction) {
+		this.fonction = fonction;
+	}
+
+	
+
+
+
+}
+>>>>>>> 7702d09c08c37da27c3f69f7c8dc4c3349e996fc
